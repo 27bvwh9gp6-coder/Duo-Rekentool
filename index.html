@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DUO Rekentool — SF35 Studieschuld Calculator</title>
+  <meta name="description" content="Bereken je maandelijkse DUO-terugbetaling, rente, kwijtschelding en hypotheek-impact. Gratis SF35 studieschuld calculator met scenariovergelijking.">
+  <meta name="keywords" content="DUO, studieschuld, terugbetalen, SF35, calculator, rekentool, hypotheek, kwijtschelding, draagkracht, studiefinanciering">
+  <meta name="author" content="DUO Rekentool">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://duo-rekentool.nl/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="DUO Rekentool — SF35 Studieschuld Calculator">
+  <meta property="og:description" content="Bereken je maandelijkse DUO-terugbetaling, rente, kwijtschelding en hypotheek-impact. Gratis SF35 studieschuld calculator.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://duo-rekentool.nl/">
+  <meta property="og:image" content="https://duo-rekentool.nl/img/og-image.png">
+  <meta property="og:locale" content="nl_NL">
+  <meta property="og:site_name" content="DUO Rekentool">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DUO Rekentool — SF35 Studieschuld Calculator">
+  <meta name="twitter:description" content="Bereken je DUO-terugbetaling, rente, kwijtschelding en hypotheek-impact.">
+  <meta name="twitter:image" content="https://duo-rekentool.nl/img/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+
+  <!-- Theme color -->
+  <meta name="theme-color" content="#1d4ed8" id="themeColor">
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "DUO Rekentool",
+    "description": "SF35 studieschuld calculator — bereken je maandelijkse DUO-terugbetaling, rente, kwijtschelding en hypotheek-impact.",
+    "url": "https://duo-rekentool.nl/",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    },
+    "inLanguage": "nl",
+    "creator": {
+      "@type": "Organization",
+      "name": "DUO Rekentool"
+    }
+  }
+  </script>
+</head>
+<body>
+
+<main>
+<div class="ctr">
+<div class="hero">
+  <span class="badge">SF35 — Studiefinanciering 35 jaar</span>
+  <h1>DUO Rekentool</h1>
+  <p>Bereken stap voor stap wat je maandelijks zal gaan terugbetalen, hoeveel rente je betaalt, welk bedrag er wordt kwijtgescholden, en wat de impact van je studieschuld is op je hypotheek.</p>
+  <p style="font-size:.78rem;color:var(--muted);margin-top:12px">Doorloop de volgende stappen:</p>
+  <div class="hero-steps"><div class="hero-step"><span class="num">1</span> Vul je gegevens in</div><span class="hero-step arr">→</span><div class="hero-step"><span class="num">2</span> Bekijk je resultaat</div><span class="hero-step arr">→</span><div class="hero-step"><span class="num">3</span> Vergelijk scenario's</div></div>
+  <p class="hero-note">Deze tool is bedoeld voor het <strong>SF35-stelsel</strong> (studenten gestart na sept. 2015, looptijd 35 jaar). Voor <a href="https://duo.nl/particulier/studieschuld-terugbetalen/terugbetalingsregels.jsp" target="_blank" rel="noopener">SF15</a> gelden andere regels (15 jaar, 12% draagkracht). Onderaan staat een <a href="#begrippenlijst">begrippenlijst</a>.</p>
+  <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn-example" onclick="loadExample()" title="Modaal inkomen, één lening van €30.000">📋 Voorbeeld: één lening</button><button class="btn-example" onclick="loadExample2()" title="Starter met twee leningen en verschillende rentes">📋 Voorbeeld: twee leningen</button><button class="btn-dark" onclick="toggleDark()" id="darkBtn" title="Wissel tussen licht en donker thema">🌙 Dark mode</button></div>
+</div>
+
+<details class="intro-bar"><summary>Hoe werkt studieschuld terugbetalen?</summary><div class="ic">
+<p>Na je studie betaal je je studieschuld terug in maandelijkse termijnen. Hoeveel je betaalt hangt af van twee bedragen:</p>
+<p><strong>① Draagkracht</strong> — DUO kijkt naar je <a href="https://www.belastingdienst.nl/wps/wcm/connect/nl/belastingaangifte/belastingaangifte" target="_blank" rel="noopener">verzamelinkomen</a> van twee jaar geleden (het <em>peiljaar</em>). Van het deel boven de <em>draagkrachtvrije voet</em> (de vrijstellingsgrens, gebaseerd op het wettelijk minimumloon: 100% WML als alleenstaand, 143% met partner/kind) betaal je 4%, gedeeld door 12.</p>
+<p><strong>② Wettelijk maandbedrag</strong> — het vaste annuïtaire bedrag waarmee je de schuld in 35 jaar volledig aflost. Dit is een <em>plafond</em>: je betaalt nooit meer.</p>
+<p>Je betaalt het <strong>laagste</strong> van deze twee. Bij een laag inkomen betaal je dus minder dan nodig om alles af te lossen. Dat betekent dat er na 35 jaar schuld overblijft — die wordt <a href="https://duo.nl/particulier/studieschuld-terugbetalen/kwijtschelding.jsp" target="_blank" rel="noopener">kwijtgescholden</a>. DUO herberekent je draagkracht elk jaar opnieuw.</p>
+<p style="margin-top:8px"><strong>Links:</strong> <a href="https://duo.nl/particulier/studieschuld-terugbetalen/terugbetalingsregels.jsp" target="_blank" rel="noopener">DUO terugbetalingsregels</a> · <a href="https://duo.nl/particulier/studieschuld-terugbetalen/berekening-maandbedrag.jsp" target="_blank" rel="noopener">Berekening maandbedrag</a> · <a href="https://www.nibud.nl/onderwerpen/studeren/studieschuld/" target="_blank" rel="noopener">Nibud</a> · <a href="https://www.rijksoverheid.nl/onderwerpen/studiefinanciering/terugbetalen-studieschuld" target="_blank" rel="noopener">Rijksoverheid</a></p>
+</div></details>
+
+<!-- SEC 1 --><div class="sec open" id="s1"><div class="sh" onclick="tog('s1')"><h2><span class="sn">1</span> Jouw situatie</h2><svg class="chv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="sb"><div class="sc">
+<div class="field"><label>Huishoudsituatie <span class="tip">i<span class="tt">Bepaalt je draagkrachtvrije voet — het deel van je inkomen waarover je niet hoeft af te lossen. Alleenstaand = 100% WML, met partner of kind = 143%.</span></span></label><select id="household" onchange="calc()"><option value="1">Alleenstaand zonder kinderen</option><option value="2">Alleenstaande ouder (kind &lt;18)</option><option value="3">Met partner</option></select></div>
+<div class="fr"><div class="field"><label>Verzamelinkomen (peiljaar) <span class="tip">i<span class="tt">Vul je verzamelinkomen van <strong>2 jaar geleden</strong> in — dat is wat DUO gebruikt (het <em>peiljaar</em>). Je vindt dit op je belastingaangifte van 2 jaar terug. Voor de meeste mensen in loondienst is dit grofweg je bruto jaarloon <em>inclusief</em> vakantiegeld en eventuele 13e maand, vóór aftrekposten. <a href="https://www.belastingdienst.nl/wps/wcm/connect/nl/belastingaangifte/belastingaangifte" target="_blank" rel="noopener">Belastingdienst</a>.</span></span></label><div class="fs"><input type="number" id="income" value="0" oninput="calc()"><span class="sf">€/jr</span></div></div><div class="field"><label>Inkomen partner</label><div class="fs"><input type="number" id="partnerIncome" value="0" oninput="calc()"><span class="sf">€/jr</span></div><div class="hint">Vul 0 in als je geen partner hebt</div></div></div>
+<div class="fr"><div class="field"><label>Verwachte inkomensstijging <span class="tip">i<span class="tt">Gemiddelde jaarlijkse stijging. 3-5% is gebruikelijk (inflatie + loonsverhoging). Beïnvloedt wanneer je het maximale maandbedrag bereikt.</span></span></label><div class="fs"><input type="number" id="incomeGrowth" value="3" step="0.5" oninput="calc()"><span class="sf">%</span></div></div><div class="field"><label>Wettelijk minimumloon (WML) <span class="tip">i<span class="tt">Het wettelijk minimumloon per jaar van het <em>peiljaar</em> (2 jaar geleden). DUO gebruikt dit als basis voor de draagkrachtvrije voet (vrijstellingsgrens): 100% WML als alleenstaand zonder kinderen, 143% WML met partner of kind. Het WML zelf is niet afhankelijk van je huishoudsituatie. <a href="https://duo.nl/particulier/studieschuld-terugbetalen/berekening-maandbedrag.jsp" target="_blank" rel="noopener">Actuele bedragen op duo.nl</a>.</span></span></label><div class="fs"><input type="number" id="wml" value="26819" oninput="calc()"><span class="sf">€/jr</span></div></div></div>
+<button class="rp-toggle" type="button" onclick="document.getElementById('igBox').style.display=document.getElementById('igBox').style.display==='none'?'':'none'">▸ Inkomensstijging per 5-jaarperiode aanpassen</button>
+<div id="igBox" style="display:none">
+<div class="info" style="margin-top:8px">Standaard wordt het bovenstaande groeipercentage voor alle jaren gebruikt. Hier kun je per periode een ander percentage instellen — bijv. snellere groei aan het begin van je carrière.</div>
+<div class="rp-grid" id="igGrid"></div>
+</div>
+</div></div></div>
+
+<!-- SEC 2 --><div class="sec open" id="s2"><div class="sh" onclick="tog('s2')"><h2><span class="sn">2</span> Leningen</h2><svg class="chv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="sb"><div class="sc">
+<div class="info">Vul je schuld in zoals in <a href="https://duo.nl/particulier/mijn-duo.jsp" target="_blank" rel="noopener">Mijn DUO</a> → Mijn schulden. DUO zet je rente telkens voor 5 jaar vast. Bij twee leningen met verschillende aanloopfases wordt eerst afgelost op de lening die het eerst in de <a href="https://duo.nl/particulier/studieschuld-terugbetalen/terugbetalingsregels.jsp" target="_blank" rel="noopener">aflosfase</a> komt.</div>
+<div class="sub-label"><span class="ldot l1"></span> Lening 1</div>
+<div class="fr"><div class="field"><label>Huidige schuld</label><div class="fs"><input type="number" id="debt1" value="0" oninput="calc()"><span class="sf">€</span></div></div><div class="field"><label>Aanloopfase resterend <span class="tip">i<span class="tt">Maanden rente-opbouw vóór je aflosfase begint. Vul 0 in als je al aflost. Check <a href="https://duo.nl/particulier/mijn-duo.jsp" target="_blank" rel="noopener">Mijn DUO</a>.</span></span></label><div class="fs"><input type="number" id="runway1" value="0" oninput="calc()"><span class="sf">mnd</span></div></div></div>
+<div class="fr"><div class="field"><label>Rente aanloopfase</label><div class="fs"><input type="number" id="rateRunway1" value="2.33" step="0.01" oninput="calc()"><span class="sf">%</span></div></div><div class="field"><label>Rente aflosfase <span class="tip">i<span class="tt">DUO zet de rente 5 jaar vast bij start aflosfase. <a href="https://duo.nl/particulier/rente/rente-voor-terugbetalers.jsp" target="_blank" rel="noopener">Actuele rentes op duo.nl</a>.</span></span></label><div class="fs"><input type="number" id="rateRepay1" value="2.33" step="0.01" oninput="calc()"><span class="sf">%</span></div></div></div>
+<div class="fr"><div class="field"><label>Resterende looptijd <span class="tip">i<span class="tt"><strong>Het totaal aantal maanden dat je nog hebt</strong>, inclusief eventuele aanloopfase. Nog niet begonnen met aflossen? Vul 420 in (35 jaar). Al X jaar aan het aflossen? Vul 420 minus het aantal maanden dat je al aflost in. Check <a href="https://duo.nl/particulier/mijn-duo.jsp" target="_blank" rel="noopener">Mijn DUO</a> voor je einddatum.</span></span></label><div class="fs"><input type="number" id="term1" value="420" oninput="calc()"><span class="sf">mnd</span></div><div class="hint">420 = nog niet begonnen · lager = al bezig</div></div><div class="field"><label>Wettelijk maandbedrag <span class="tip">i<span class="tt"><strong>Zit je al in de aflosfase?</strong> Vul dan je wettelijk maandbedrag in zoals DUO dat toont in <a href="https://duo.nl/particulier/mijn-duo.jsp" target="_blank" rel="noopener">Mijn DUO</a>. De tool kan dit niet exact zelf berekenen als je al aflost, omdat DUO het baseert op je schuld bij start aflosfase over 420 maanden. Laat op 0 als je nog niet aflost — dan berekent de tool het automatisch.</span></span></label><div class="fs"><input type="number" id="wmOverride1" value="0" step="0.01" oninput="calc()"><span class="sf">€/mnd</span></div><div class="hint">0 = automatisch berekend · <strong>invullen aanbevolen als je al aflost</strong></div></div></div>
+<div class="divider"></div>
+<div class="sub-label"><span class="ldot l2"></span> Lening 2 <span style="font-weight:400;text-transform:none;letter-spacing:0">— zet schuld op 0 als je er maar 1 hebt</span></div>
+<div class="fr"><div class="field"><label>Huidige schuld</label><div class="fs"><input type="number" id="debt2" value="0" oninput="calc()"><span class="sf">€</span></div></div><div class="field"><label>Aanloopfase resterend</label><div class="fs"><input type="number" id="runway2" value="0" oninput="calc()"><span class="sf">mnd</span></div></div></div>
+<div class="fr"><div class="field"><label>Rente aanloopfase</label><div class="fs"><input type="number" id="rateRunway2" value="2.33" step="0.01" oninput="calc()"><span class="sf">%</span></div></div><div class="field"><label>Rente aflosfase</label><div class="fs"><input type="number" id="rateRepay2" value="2.33" step="0.01" oninput="calc()"><span class="sf">%</span></div></div></div>
+<div class="fr"><div class="field"><label>Resterende looptijd</label><div class="fs"><input type="number" id="term2" value="420" oninput="calc()"><span class="sf">mnd</span></div></div><div class="field"><label>Wettelijk maandbedrag</label><div class="fs"><input type="number" id="wmOverride2" value="0" step="0.01" oninput="calc()"><span class="sf">€/mnd</span></div><div class="hint">0 = automatisch · <strong>invullen als je al aflost</strong></div></div></div>
+<div class="divider"></div>
+<button class="rp-toggle" type="button" onclick="document.getElementById('rpBox').style.display=document.getElementById('rpBox').style.display==='none'?'':'none'">▸ Rente per 5-jaarperiode aanpassen</button>
+<div id="rpBox" style="display:none">
+<div class="info" style="margin-top:8px">DUO zet je rente telkens voor 5 jaar vast. Hier kun je simuleren wat er gebeurt als de rente in toekomstige periodes verandert. Standaard wordt de rente uit de aflosfase gebruikt voor alle periodes.</div>
+<div class="sub-label"><span class="ldot l1"></span> Lening 1 — rente per periode</div>
+<div class="rp-grid" id="rpGrid1"></div>
+<div class="sub-label"><span class="ldot l2"></span> Lening 2 — rente per periode</div>
+<div class="rp-grid" id="rpGrid2"></div>
+</div>
+</div></div></div>
+
+<!-- SEC 3 --><div class="sec open" id="s3"><div class="sh" onclick="tog('s3')"><h2><span class="sn">3</span> Resultaat</h2><svg class="chv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="sb"><div class="sc">
+<div class="info" id="calcExplain"></div>
+<div class="rg" style="grid-template-columns:1fr 1fr 1fr">
+  <div class="rc hl"><div class="rl">Je betaalt per maand (jaar 1) <span class="tip">i<span class="tt">Het laagste van draagkracht en wettelijk maandbedrag. DUO herberekent dit elk jaar op basis van je inkomen van 2 jaar eerder.</span></span></div><div class="rv" id="r-pay">—</div><div class="rs" id="r-payW"></div></div>
+  <div class="rc"><div class="rl">Draagkracht <span class="tip">i<span class="tt">4% van (inkomen − vrijstelling) ÷ 12. Stijgt mee met je inkomen, tot het plafond.</span></span></div><div class="rv sm" id="r-dk">—</div><div class="rs" id="r-dkSub"></div></div>
+  <div class="rc"><div class="rl">Wettelijk maandbedrag <span class="tip">i<span class="tt">Het plafond: annuïteit over de resterende aflosperiode (looptijd minus aanloopfase). Je betaalt nooit meer dan dit bedrag, ook bij een hoog inkomen.</span></span></div><div class="rv sm" id="r-wm">—</div><div class="rs" id="r-wmSub">Maximum (plafond)</div></div>
+</div>
+<div id="insightBox" class="insight"></div>
+<div class="rate-badge"><span class="rb-dot"></span> Gewogen rente: <strong id="r-blended">—</strong> <span class="tip">i<span class="tt">Gewogen gemiddelde van je rentes naar schuldgrootte. Dit is de effectieve rente over je totale schuld.</span></span></div>
+<div class="rg" style="grid-template-columns:1fr 1fr">
+  <div class="rc c1"><div class="rl"><span class="ldot l1"></span> Lening 1 bij start aflosfase</div><div class="rv sm" id="r-cs1">—</div><div class="rs" id="r-cs1s"></div></div>
+  <div class="rc c2"><div class="rl"><span class="ldot l2"></span> Lening 2 bij start aflosfase</div><div class="rv sm" id="r-cs2">—</div><div class="rs" id="r-cs2s"></div></div>
+</div>
+<div class="rg" style="grid-template-columns:1fr 1fr 1fr">
+  <div class="rc"><div class="rl">Totaal betaald (35 jr)</div><div class="rv sm" id="r-totP">—</div></div>
+  <div class="rc"><div class="rl">Totaal rente</div><div class="rv sm" id="r-totI">—</div><div class="rs" id="r-intP"></div></div>
+  <div class="rc gn"><div class="rl">Kwijtgescholden <span class="tip">i<span class="tt">Restschuld na 35 jaar wordt kwijtgescholden (sinds 2024 onbelast). Dit ontstaat doordat je draagkracht jarenlang lager is dan het wettelijk maandbedrag. <a href="https://duo.nl/particulier/studieschuld-terugbetalen/kwijtschelding.jsp" target="_blank" rel="noopener">Meer info</a>.</span></span></div><div class="rv sm" id="r-forg">—</div></div>
+</div>
+<div class="rg" style="grid-template-columns:1fr 1fr">
+  <div class="rc"><div class="rl"><span class="ldot l1"></span> Lening 1: kwijtschelding / rente</div><div class="rv sm" id="r-kw1">—</div><div class="rs" id="r-kw1s"></div></div>
+  <div class="rc"><div class="rl"><span class="ldot l2"></span> Lening 2: kwijtschelding / rente</div><div class="rv sm" id="r-kw2">—</div><div class="rs" id="r-kw2s"></div></div>
+</div>
+<div class="donut-section"><h3>Waar gaat je geld heen?</h3><div class="donut-note">Totaalplaatje over 35 jaar op basis van je huidige invoer. Bij inkomensstijging veranderen deze verhoudingen.</div>
+<div class="donut-wrap"><div class="donut-box"><canvas id="cDonut" width="140" height="140"></canvas></div><div class="donut-legend" id="donutLeg"></div></div></div>
+
+<div class="tabs"><button class="tab active" onclick="showTab('tP',this)">Maandbedrag</button><button class="tab" onclick="showTab('tD',this)">Restschuld</button><button class="tab" onclick="showTab('tV',this)">Rente vs. aflossing</button></div>
+<div id="tP" class="tc active"><div class="chart-wrap"><canvas id="cPay"></canvas></div><div class="chart-label">Gemiddeld maandbedrag per jaar — Lening 1 + Lening 2 gestapeld</div></div>
+<div id="tD" class="tc"><div class="chart-wrap"><canvas id="cDebt"></canvas></div><div class="chart-label">Restschuld per lening over 35 jaar</div></div>
+<div id="tV" class="tc"><div class="chart-wrap"><canvas id="cRatio"></canvas></div><div class="chart-label">Hoeveel % van je betaling gaat naar rente vs. aflossing</div></div>
+<div id="phaseInfo" class="info" style="margin-top:14px;display:none"></div>
+</div></div></div>
+
+<!-- SEC 3a: SCENARIO'S --><div class="sec" id="s3a"><div class="sh" onclick="tog('s3a')"><h2><span class="sn" style="background:var(--orange)">↔</span> Scenario's vergelijken</h2><svg class="chv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="sb"><div class="sc">
+<div class="info">Bewaar je huidige berekening als scenario en pas daarna je invoer aan. Zo vergelijk je eenvoudig het effect van bijv. een hogere rente, extra aflossing, of inkomensstijging.</div>
+<div class="scen-bar">
+  <button class="scen-btn save" onclick="saveScenario()">+ Bewaar huidige berekening als scenario</button>
+  <button class="scen-btn" onclick="clearScenarios()" id="clearScenBtn" style="display:none">Wis alles</button>
+</div>
+<div id="scenResult"></div>
+<div id="scenCharts" class="scen-charts"></div>
+</div></div></div>
+
+<!-- SEC 4 --><div class="sec" id="s4"><div class="sh" onclick="tog('s4')"><h2><span class="sn">4</span> Aflossingstabel</h2><svg class="chv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="sb"><div class="sc">
+<div class="info">Gedetailleerd overzicht van je aflossing. Hover over de kolomnamen voor uitleg. <span id="tblNote"></span></div>
+<div class="tabs"><button class="tab active" onclick="showTbl('y',this)">Per jaar</button><button class="tab" onclick="showTbl('m',this)">Per maand</button></div>
+<div class="tbl-wrap" id="tblWrap"></div>
+</div></div></div>
+
+<!-- SEC 5 --><div class="sec" id="s5"><div class="sh" onclick="tog('s5')"><h2><span class="sn">5</span> Hypotheekcalculator</h2><svg class="chv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="sb"><div class="sc">
+<div class="info">Bereken een indicatie van je maximale hypotheek op basis van je inkomen, en bekijk direct hoeveel je studieschuld die verlaagt. Gebaseerd op NIBUD-normen 2026 en de Trhk 2026. <a href="https://www.hypotheker.nl/en/calculators-and-checks/maximum-mortgage/" target="_blank" rel="noopener">Vergelijk met Hypotheker</a> · <a href="https://www.nibud.nl/onderzoeksrapporten/rapport-advies-hypotheeknormen-2026-2025/" target="_blank" rel="noopener">NIBUD-rapport</a></div>
+
+<h3 style="margin:16px 0 8px;font-size:1rem">Jouw inkomen</h3>
+<div class="fr"><div class="field"><label>Bruto jaarinkomen <span class="tip">i<span class="tt">Je bruto jaarinkomen inclusief vakantiegeld. Dit is je <em>toetsinkomen</em>. Bij een vast contract is dit je jaarsalaris. Bij een flexibel contract kijkt de bank naar het gemiddelde van de afgelopen 3 jaar.</span></span></label><div class="fs"><input type="number" id="hypIncome" value="0" oninput="calcHyp()"><span class="sf">€/jr</span></div></div><div class="field"><label>Bruto jaarinkomen partner</label><div class="fs"><input type="number" id="hypIncome2" value="0" oninput="calcHyp()"><span class="sf">€/jr</span></div><div class="hint">0 = alleen kopen</div></div></div>
+<div class="fr"><div class="field"><label>Hypotheekrente <span class="tip">i<span class="tt">De hypotheekrente waarmee de bank toetst. Standaard 4%. In de praktijk hanteert de bank een <em>toetsrente</em> (vaak 5% bij korte rentevaste periodes). Bij 10+ jaar rentevast wordt meestal je werkelijke rente gebruikt. Pas dit aan om scenario's te vergelijken.</span></span></label><div class="fs"><input type="number" id="hypRate" value="4.0" step="0.1" oninput="calcHyp()"><span class="sf">%</span></div></div><div class="field"><label>Alleenstaand <span class="tip">i<span class="tt">Alleenstaanden mogen ca. €17.000 extra lenen (NIBUD-norm 2026).</span></span></label><select id="hypSingle" onchange="calcHyp()"><option value="0">Nee (stel/gezin)</option><option value="1" selected>Ja, alleenstaand</option></select></div></div>
+<div class="fr"><div class="field"><label>Energielabel woning <span class="tip">i<span class="tt">Bij een energiezuinige woning mag je extra lenen. De hoogte hangt af van het label. <a href="https://www.hypotheker.nl/begrippenlijst/veelgestelde-vragen/energielabel-hypotheek/" target="_blank" rel="noopener">Meer info</a>.</span></span></label><select id="hypLabel" onchange="calcHyp()"><option value="0">E / F / G (standaard)</option><option value="5000">C / D (+€5.000)</option><option value="10000">A / B (+€10.000)</option><option value="20000">A+ / A++ (+€20.000)</option><option value="25000">A+++ (+€25.000)</option><option value="30000">A++++ (+€30.000)</option></select></div></div>
+
+<h3 style="margin:16px 0 8px;font-size:1rem">Overige lasten</h3>
+<div class="fr"><div class="field"><label>Eenmalige extra aflossing DUO</label><div class="fs"><input type="number" id="extraPayoff" value="0" oninput="calc();calcHyp()"><span class="sf">€</span></div><div class="hint">Vergelijk: DUO aflossen vs. eigen inleg hypotheek</div></div><div class="field"><label>Aflossen op <span class="tip">i<span class="tt">Kies op welke lening je extra aflost. Bij een hoger rentepercentage op lening 2 kan het voordeliger zijn om daar eerst op af te lossen. 'Automatisch' lost eerst af op lening 1.</span></span></label><select id="extraTarget" onchange="calc();calcHyp()"><option value="auto">Automatisch (L1 eerst)</option><option value="l1">Alleen lening 1</option><option value="l2">Alleen lening 2</option><option value="split">50/50 verdelen</option></select></div></div>
+<div class="fr"><div class="field"><label>Overige vaste lasten <span class="tip">i<span class="tt">Vaste maandelijkse verplichtingen die de bank meerekent, zoals: private lease auto, persoonlijke lening, doorlopend krediet, of partneralimentatie. <strong>Niet:</strong> boodschappen, abonnementen of andere dagelijkse uitgaven — die zitten al in de NIBUD-norm.</span></span></label><div class="fs"><input type="number" id="hypOtherDebt" value="0" oninput="calcHyp()"><span class="sf">€/mnd</span></div><div class="hint">Lease, lening, alimentatie</div></div></div>
+
+<div class="rg" style="grid-template-columns:1fr 1fr;margin-top:12px">
+<div class="rc og"><div class="rl" style="font-size:1.05rem">Maximale hypotheek (indicatie)</div><div class="rv" id="r-hypMax" style="font-size:1.4rem">—</div><div class="rs" id="r-hypSub"></div></div>
+<div class="rc"><div class="rl">Indicatieve maandlast (bruto)</div><div class="rv sm" id="r-hypMonth">—</div><div class="rs" id="r-hypMonthSub"></div></div>
+</div>
+
+<div class="rg" style="grid-template-columns:1fr 1fr">
+<div class="rc"><div class="rl">Max. hypotheek op inkomen</div><div class="rv sm" id="r-hypLTI">—</div><div class="rs">Vóór aftrek studieschuld</div></div>
+<div class="rc" style="border-left:3px solid #ef4444"><div class="rl">Verlaging door studieschuld</div><div class="rv sm" style="color:#ef4444" id="r-hypDuo">—</div><div class="rs" id="r-hypDuoSub"></div></div>
+</div>
+
+<div class="rg" style="grid-template-columns:1fr 1fr">
+<div class="rc"><div class="rl">Gebruteerd DUO-maandbedrag</div><div class="rv sm" id="r-gM">—</div><div class="rs" id="r-bfSub"></div></div>
+<div class="rc"><div class="rl">Financieringslastpercentage</div><div class="rv sm" id="r-hypFL">—</div><div class="rs">NIBUD-norm 2026</div></div>
+</div>
+
+<div id="exBl" style="display:none">
+<div class="rg" style="grid-template-columns:1fr 1fr"><div class="rc gn"><div class="rl">Extra hypotheekruimte <span class="tip">i<span class="tt">Door extra aflossen op DUO daalt je wettelijk maandbedrag, waardoor de bank je meer hypotheek geeft.</span></span></div><div class="rv sm" id="r-exR">—</div><div class="rs">Door DUO-schuld te verlagen</div></div><div class="rc"><div class="rl">Rendement per €1</div><div class="rv sm" id="r-rE">—</div></div></div>
+<div class="rg" style="grid-template-columns:1fr 1fr"><div class="rc"><div class="rl">Maandbedrag vóór</div><div class="rv sm" id="r-wmB">—</div></div><div class="rc gn"><div class="rl">Maandbedrag ná</div><div class="rv sm" id="r-wmA">—</div><div class="rs" id="r-wmS"></div></div></div>
+<div class="info" id="eigenInlegInfo" style="border-left-color:#d97706"></div>
+</div>
+
+<div class="info" style="margin-top:12px;font-size:.78rem;border-left-color:#d97706"><strong>Let op:</strong> dit is een vereenvoudigde indicatie. De werkelijke maximale hypotheek hangt af van de geldverstrekker, je exacte fiscale situatie, woningwaarde (max 100% LTV), en andere factoren. Raadpleeg altijd een hypotheekadviseur.</div>
+</div></div></div>
+
+<!-- SEC 6 --><div class="sec" id="s6"><div class="sh" onclick="tog('s6')"><h2><span class="sn">6</span> Extra aflossen vs. sparen/beleggen</h2><svg class="chv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="sb"><div class="sc">
+<div class="info">Is het slimmer om maandelijks extra af te lossen op je DUO-schuld, of dat bedrag te sparen of beleggen? <span class="tip">i<span class="tt"><strong>Hoe werkt de berekening?</strong><br>• <strong>Aflossen:</strong> elke extra aflossing verlaagt je restschuld. Daardoor betaal je minder rente, en die besparing groeit met samengestelde rente — precies hetzelfde effect als beleggen, maar dan met je DUO-rente als rendement.<br>• <strong>Sparen/beleggen:</strong> elke maand inleg groeit met samengestelde rente tegen je verwachte rendement.<br>• De twee zijn dus direct vergelijkbaar: <strong>als je DUO-rente hoger is dan je rendement, is aflossen altijd voordeliger</strong> (en andersom).<br>Exclusief box 3-belasting. <a href="https://www.belastingdienst.nl/wps/wcm/connect/nl/box-3/box-3" target="_blank" rel="noopener">Meer over box 3</a>.</span></span></div>
+<div class="rate-badge"><span class="rb-dot"></span> Aflossingsrente: <strong id="r-blended2">—</strong> · Rendement: <strong id="r-savRateDisp">—</strong></div>
+<div class="fr"><div class="field"><label>Maandelijks extra bedrag</label><div class="fs"><input type="number" id="savingsAmount" value="100" oninput="calc()"><span class="sf">€/mnd</span></div></div><div class="field"><label>Verwacht rendement (sparen/beleggen)</label><div class="fs"><input type="number" id="savingsRate" value="3.0" step="0.1" oninput="calc()"><span class="sf">%</span></div></div></div>
+<div class="fr"><div class="field"><label>Vergelijkingsperiode</label><div class="fs"><input type="number" id="savingsYears" value="10" oninput="calc()"><span class="sf">jaar</span></div></div><div class="field"><label>Aflossen op <span class="tip">i<span class="tt">Op welke lening zou je extra aflossen? Bij een hoger rentepercentage bespaar je meer door op die lening af te lossen. De rente van de gekozen lening wordt gebruikt in de berekening.</span></span></label><select id="savTarget" onchange="calc()"><option value="blended">Gewogen gemiddelde</option><option value="l1">Lening 1</option><option value="l2">Lening 2</option></select></div></div>
+<div class="rg" style="grid-template-columns:1fr 1fr"><div class="rc"><div class="rl">Bespaard door extra aflossen <span class="tip">i<span class="tt">Rentekosten die je bespaart door maandelijks extra af te lossen. Berekend over de gemiddelde uitstaande schuld gedurende de vergelijkingsperiode.</span></span></div><div class="rv sm" id="r-sP">—</div></div><div class="rc"><div class="rl">Opbrengst sparen/beleggen <span class="tip">i<span class="tt">Samengestelde rente op maandelijkse inleg. Elke storting rendeert tot het einde van de vergelijkingsperiode — de eerste inleg het langst, de laatste nauwelijks.</span></span></div><div class="rv sm" id="r-sR">—</div></div></div>
+<div class="ch" style="height:220px"><canvas id="cSave"></canvas></div>
+<div class="rc" id="r-aC" style="border:1px solid var(--border);border-radius:var(--radius)"><div class="rl">Conclusie</div><div class="rv sm" id="r-aV" style="font-family:var(--font);font-size:.86rem;font-weight:500">—</div></div>
+</div></div></div>
+
+<details class="intro-bar" style="margin-top:20px"><summary>Tips: peiljaarverlegging & €0-betaling</summary><div class="ic">
+<p><strong>Peiljaarverlegging:</strong> DUO kijkt standaard 2 jaar terug. Is je inkomen nu veel lager? Vraag <a href="https://duo.nl/particulier/studieschuld-terugbetalen/minder-betalen.jsp" target="_blank" rel="noopener">peiljaarverlegging</a> aan zodat DUO je huidige inkomen gebruikt.</p>
+<p><strong>€0 betalen:</strong> Verdien je minder dan de vrijstelling? Dan betaal je €0. De looptijd loopt door en na 35 jaar wordt alles kwijtgescholden.</p>
+</div></details>
+
+<details class="intro-bar" id="begrippenlijst"><summary>Begrippenlijst</summary>
+<div class="begrip-grid">
+<div class="begrip"><strong>SF35</strong><span>Studiefinanciering 35 jaar. Na sept. 2015 gestart.</span></div>
+<div class="begrip"><strong>SF15</strong><span>Studiefinanciering 15 jaar. Vóór sept. 2015 gestart. Andere regels.</span></div>
+<div class="begrip"><strong>Draagkracht</strong><span>Max. maandbedrag o.b.v. inkomen: 4% van surplus ÷ 12.</span></div>
+<div class="begrip"><strong>Draagkrachtvrije voet</strong><span>Inkomensvrijstelling. 100% WML of 143% met partner/kind.</span></div>
+<div class="begrip"><strong>Annuïteit</strong><span>Vast maandbedrag: rente + aflossing. Begin meer rente, later meer aflossing.</span></div>
+<div class="begrip"><strong>Aanloopfase</strong><span>Periode na studie: nog geen aflossing, wél rente-opbouw.</span></div>
+<div class="begrip"><strong>Aflosfase</strong><span>Daadwerkelijke terugbetaling. Max. 35 jaar (SF35).</span></div>
+<div class="begrip"><strong>Peiljaar</strong><span>Jaar waarover DUO je inkomen bekijkt. Meestal 2 jaar terug.</span></div>
+<div class="begrip"><strong>Bruteringsfactor</strong><span>Factor voor hypotheekaanvraag. Hoger bij hogere hypotheekrente.</span></div>
+<div class="begrip"><strong>Kwijtschelding</strong><span>Restschuld na 35 jaar vervalt. Sinds 2024 onbelast.</span></div>
+<div class="begrip"><strong>Pechgeneratie</strong><span>Studenten 2015-2023 zonder basisbeurs. Compensatie wordt automatisch verrekend.</span></div>
+<div class="begrip"><strong>Gewogen rente</strong><span>Gemiddelde rente gewogen naar schuldgrootte per lening.</span></div>
+</div></details>
+
+<div class="share-bar"><span class="share-label">Deel je berekening</span><input type="text" id="shareUrl" readonly onclick="this.select()"><button id="copyBtn" onclick="copyUrl()">Kopieer link</button></div>
+<button class="pdf-btn" onclick="exportPDF()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Rapport opslaan als PDF</button>
+</div>
+</main>
+
+<footer>
+  <p>Indicatieve berekening o.b.v. DUO SF35-regels (2026) — geen financieel advies. Voor SF15 gelden <a href="https://duo.nl/particulier/studieschuld-terugbetalen/terugbetalingsregels.jsp" target="_blank" rel="noopener">andere regels</a>.</p>
+  <p style="margin-top:4px"><a href="https://duo.nl/particulier/mijn-duo.jsp" target="_blank" rel="noopener">Mijn DUO</a> · <a href="https://duo.nl/particulier/studieschuld-terugbetalen/berekening-maandbedrag.jsp" target="_blank" rel="noopener">DUO rekenhulp</a> · <a href="https://duo.nl/particulier/rente/rente-voor-terugbetalers.jsp" target="_blank" rel="noopener">Actuele rentes</a> · <a href="https://www.nibud.nl/onderwerpen/studeren/studieschuld/" target="_blank" rel="noopener">Nibud</a></p>
+</footer>
+
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<!-- jsPDF for PDF export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+
+<!-- App -->
+<script src="/js/app.js"></script>
+</body>
+</html>
